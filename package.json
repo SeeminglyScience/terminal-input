@@ -1,0 +1,58 @@
+{
+	"name": "terminal-input",
+	"displayName": "Terminal Input",
+	"description": "Assign custom input sequences that can be sent to the active terminal.",
+	"publisher": "SeeminglyScience",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/SeeminglyScience/terminal-input.git"
+	},
+	"engines": {
+		"vscode": "^1.32.0"
+	},
+	"keywords": [ "terminal", "input", "shift+enter" ],
+	"license": "MIT",
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:terminalInput.sendCustomInput"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [{
+			"command": "terminalInput.sendCustomInput",
+			"title": "Send Custom Terminal Input"
+		}],
+		"configuration": [{
+			"title": "Terminal Input",
+			"properties": {
+				"terminalInput.customInputs": {
+					"title": "Custom Inputs",
+					"description": "Strings that can be used by the sendCustomInput command to send raw input to the active terminal.",
+					"type": "object",
+					"default": { "heartEmojiWithAlt": "\u001b\u2665" },
+					"additionalProperties": [{
+						"type": "string",
+						"title": "Input",
+						"description": "Text to send to the terminal as raw input."
+					}]
+				}
+			}
+		}]
+	},
+	"scripts": {
+		"vscode:prepublish": "yarn run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^3.4.1",
+		"vscode": "^1.1.33",
+		"tslint": "^5.14.0",
+		"@types/node": "^11.12.2"
+	}
+}
